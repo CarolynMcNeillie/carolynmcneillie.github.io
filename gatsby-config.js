@@ -5,11 +5,5 @@ module.exports = {
   },
   plugins: [
     "gatsby-plugin-styled-components",
-    {
-      resolve: `gatsby-source-pokeapi`,
-      options: {
-        nbOfPokemons: 251,
-      },
-    },
   ]
 };
