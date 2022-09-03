@@ -1,6 +1,12 @@
 import React, {useState} from "react";
 import { useStaticQuery, graphql } from 'gatsby';
 
+import Pokedex from '../components/Pokedex'
+import BattleZone from '../components/BattleZone'
+import WhosThatPokemon from '../components/WhosThatPokemon'
+
+import { Heading } from './styles'
+
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -48,85 +54,37 @@ const IndexPage = () => {
     }
   });
 
-  const spriteNames = ['front_default', 'front_female', 'front_shiny', 'front_shiny_female']
+  const [view, setView] = useState('select')
 
-  const [currentMon, setCurrentMon] = useState(allPokemon[0])
-
-  const StatCard = ({pokemon}) => (
-    <article key={pokemon.id}>
-      {spriteNames.map(sprite => (pokemon.sprites[`${sprite}`] ? <img key={`${pokemon.name}-${sprite}`} src={pokemon.sprites[`${sprite}`]} alt={`${pokemon.name} ${sprite}`}/> : null))}
-      <h3>{ pokemon.name }, HP: {pokemon.hp}</h3>
-      <p><strong>Types </strong>{ pokemon.types.join(', ') }</p>
-      <p><strong>Moves </strong>{ pokemon.moves && pokemon.moves.join(', ') }</p>
-    </article>
+  const Body = () => (
+    <main>
+      {view === 'pokedex' && (
+        <Pokedex allPokemon={allPokemon} />
+      )}
+      {view === 'battle' && (
+        <BattleZone allPokemon={allPokemon} />
+      )}
+      {view === 'guess' && (
+        <WhosThatPokemon allPokemon={allPokemon}/>
+      )}
+    </main>
   )
 
-  function getPokemon(name) {
-    return allPokemon.find(pokemon => pokemon.name === name)
-  }
-  
-  function getRandomMove(moves) {
-    return moves[Math.floor(Math.random()*moves.length)];
-  }
-  
-  function battle(e) {
-    e.preventDefault();
-    const player1 = document.querySelector("#player1");
-    const player2 = document.querySelector("#player2");
-    const pokemon1 = getPokemon(player1.value)
-    const player1Move = getRandomMove(pokemon1.moves)
-    const pokemon2 = getPokemon(player2.value)
-    const player2Move = getRandomMove(pokemon2.moves)
-    console.log(pokemon1)
-    alert(`TIME TO BATTLE, ${player1.value} and ${player2.value}!!!`);
-    alert(`First up, ${player1.value} uses ${player1Move}`);
-    alert(`First up, ${player2.value} uses ${player2Move}`);
-  }
-
-
   return (
-    <main>
-      <section style={{display: 'flex', width: '100%', padding: '50px'}}>
-        <aside style={{display: 'block', minWidth: '300px', paddingRight: '40px', lineHeight: '1.4'}}>
-          <div style={{position: 'fixed', width: '280px', maxHeight: 'calc(100vh - 140px)', overflow: 'scroll'}}>
-            <StatCard pokemon={currentMon} />
-          </div>
-        </aside>
-        <main>
-        <h1>Ketchum</h1>
-          <div>
-            <h2>Battle Zone!</h2>
-            <form>
-              <select id="player1">
-                {allPokemon.map((pokemon) => (
-                  <option key={`${pokemon.id}-1`} value={`${pokemon.name}`}>
-                    {pokemon.name}
-                  </option>
-                ))}
-              </select>{" "}
-              VS{" "}
-              <select id="player2">
-                {allPokemon.map((pokemon) => (
-                  <option key={`${pokemon.id}-2`} value={`${pokemon.name}`}>
-                    {pokemon.name}
-                  </option>
-                ))}
-              </select>
-              <button onClick={battle}>BATTLE!</button>
-            </form>
-          </div>
-          <hr />
-          
-          {allPokemon.map((pokemon) => {
-            return (
-              <button onClick={() => setCurrentMon(pokemon)}>
-                <img key={`${pokemon.name}`} src={pokemon.sprites.front_default} alt={pokemon.name}/>
-              </button>
-            )
-          })}
-        </main>
-      </section>
-    </main>
+    <>
+      <nav>
+        <Heading>Ketchum</Heading>
+        <ul>
+          <li><button onClick={() => setView('pokedex')}>Pokedex</button></li>
+          <li><button onClick={() => setView('guess')}>Who's That Pokemon</button></li>
+          <li><button onClick={() => setView('battle')}>Battle Zone</button></li>
+        </ul>
+        
+      </nav>
+      <main>
+        <Body />
+      </main>
+    </>
   );
 };
 
