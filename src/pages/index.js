@@ -5,7 +5,7 @@ import Pokedex from '../components/Pokedex'
 import BattleZone from '../components/BattleZone'
 import WhosThatPokemon from '../components/WhosThatPokemon'
 
-import { Heading } from './styles'
+import {GlobalStyles, Heading, Nav, NavLink, NavButton} from '../styles/index'
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -54,7 +54,7 @@ const IndexPage = () => {
     }
   });
 
-  const [view, setView] = useState('select')
+  const [view, setView] = useState('pokedex')
 
   const Body = () => (
     <main>
@@ -72,15 +72,16 @@ const IndexPage = () => {
 
   return (
     <>
-      <nav>
+      <GlobalStyles/>
+      <Nav>
         <Heading>Ketchum</Heading>
         <ul>
-          <li><button onClick={() => setView('pokedex')}>Pokedex</button></li>
-          <li><button onClick={() => setView('guess')}>Who's That Pokemon</button></li>
-          <li><button onClick={() => setView('battle')}>Battle Zone</button></li>
+          <NavLink><NavButton onClick={() => setView('pokedex')}>Pokedex</NavButton></NavLink>
+          <NavLink><NavButton onClick={() => setView('guess')}>Who's That Pokemon</NavButton></NavLink>
+          <NavLink><NavButton onClick={() => setView('battle')}>Battle Zone</NavButton></NavLink>
         </ul>
         
-      </nav>
+      </Nav>
       <main>
         <Body />
       </main>
