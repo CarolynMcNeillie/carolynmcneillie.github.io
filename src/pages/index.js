@@ -60,7 +60,7 @@ const IndexPage = () => {
     };
   });
 
-  const [view, setView] = useState("battle");
+  const [view, setView] = useState("pokedex");
 
   const Body = () => (
     <main>
