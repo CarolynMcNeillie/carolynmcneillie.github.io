@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Ketchum`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://www.ketchum.fun`,
   },
   plugins: [
     "gatsby-plugin-styled-components",
