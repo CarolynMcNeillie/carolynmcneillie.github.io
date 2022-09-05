@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Golden, Page } from "../styles/novel";
+import { Golden, Page, Rule } from "../styles/novel";
 
 const Novel = ({ allPokemon }) => {
   return (
@@ -13,7 +13,7 @@ const Novel = ({ allPokemon }) => {
         - the <em>superstar</em> of pokemon he is the kindest and has most
         justice in his heart. his bonds with pokemon are the biggest!
       </p>
-      <hr />
+      <Rule />
     </Page>
   );
 };
