@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 
 const BattleZone = ({ allPokemon }) => {
   function getPokemon(name) {
@@ -11,8 +11,8 @@ const BattleZone = ({ allPokemon }) => {
 
   function battle(e) {
     e.preventDefault();
-    const player1 = document.querySelector("#player1");
-    const player2 = document.querySelector("#player2");
+    const player1 = useRef;
+    const player2 = useRef;
     const pokemon1 = getPokemon(player1.value);
     const player1Move = getRandomMove(pokemon1.moves);
     const pokemon2 = getPokemon(player2.value);
@@ -23,27 +23,25 @@ const BattleZone = ({ allPokemon }) => {
     alert(`Next up, ${player2.value} uses ${player2Move}`);
   }
 
+  const Player = ({playerId}) => (
+    <select>
+    {allPokemon.map((pokemon) => (
+      <option key={`${pokemon.id}-${playerId}`} value={`${pokemon.name}`}>
+        {pokemon.name}
+      </option>
+    ))}
+    </select>
+  )
+
   return (
     <main>
       <h1>Ketchum</h1>
       <div>
         <h2>Battle Zone!</h2>
         <form>
-          <select id="player1">
-            {allPokemon.map((pokemon) => (
-              <option key={`${pokemon.id}-1`} value={`${pokemon.name}`}>
-                {pokemon.name}
-              </option>
-            ))}
-          </select>{" "}
+          <Player playerId="1" ref={player1}/>
           VS{" "}
-          <select id="player2">
-            {allPokemon.map((pokemon) => (
-              <option key={`${pokemon.id}-2`} value={`${pokemon.name}`}>
-                {pokemon.name}
-              </option>
-            ))}
-          </select>
+          <Player playerId="2" ref={player2}/>
           <button onClick={battle}>BATTLE!</button>
         </form>
       </div>

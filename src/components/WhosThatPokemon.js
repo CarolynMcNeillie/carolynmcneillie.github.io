@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Container,
   ScoreBord,
@@ -19,8 +19,8 @@ const WhosThatPokemon = ({ allPokemon }) => {
   const [hintArray, setHintArray] = useState(
     shuffleArray([pokemonName, getPokemonName(), getPokemonName()])
   );
-  const input = document.querySelector("input");
-  const dialog = document.querySelector("dialog");
+  const input = useRef();
+  const dialog = useRef();
 
   useEffect(() => {
     let storedScore = 0;
@@ -32,7 +32,7 @@ const WhosThatPokemon = ({ allPokemon }) => {
   }, []);
 
   function resetStage() {
-    input.value = "";
+    ref={input}
     const newPokemon = getPokemon();
     setPokemon(newPokemon);
     pokemonName = cleanString(newPokemon.name);
@@ -100,7 +100,7 @@ const WhosThatPokemon = ({ allPokemon }) => {
 
   return (
     <Container>
-      <dialog>
+      <dialog ref={dialog}>
         <h2>You got it!</h2>
         <img src={pokemon.sprites.front_default} alt={pokemonName} />
         <p>
