@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Page = styled.article`
   max-width: 600px;
   margin: 0 auto;
+  padding: 20px;
 `;
 
 export const Golden = styled.span`
