@@ -1,6 +1,9 @@
-import React, {useRef} from "react";
+import React, {useState} from "react";
 
 const BattleZone = ({ allPokemon }) => {
+  const [pokemon1, setPokemon1] = useState(allPokemon[0]);
+  const [pokemon2, setPokemon2] = useState(allPokemon[0]);
+
   function getPokemon(name) {
     return allPokemon.find((pokemon) => pokemon.name === name);
   }
@@ -11,27 +14,22 @@ const BattleZone = ({ allPokemon }) => {
 
   function battle(e) {
     e.preventDefault();
-    const player1 = useRef;
-    const player2 = useRef;
-    const pokemon1 = getPokemon(player1.value);
     const player1Move = getRandomMove(pokemon1.moves);
-    const pokemon2 = getPokemon(player2.value);
     const player2Move = getRandomMove(pokemon2.moves);
-    console.log(pokemon1);
-    alert(`TIME TO BATTLE, ${player1.value} and ${player2.value}!!!`);
-    alert(`First up, ${player1.value} uses ${player1Move}`);
-    alert(`Next up, ${player2.value} uses ${player2Move}`);
+    alert(`TIME TO BATTLE, ${pokemon1.name} and ${pokemon2.name}!!!`);
+    alert(`First up, ${pokemon1.name} uses ${player1Move}`);
+    alert(`Next up, ${pokemon2.name} uses ${player2Move}`);
   }
 
-  const Player = ({playerId}) => (
-    <select>
-    {allPokemon.map((pokemon) => (
-      <option key={`${pokemon.id}-${playerId}`} value={`${pokemon.name}`}>
-        {pokemon.name}
-      </option>
-    ))}
-    </select>
-  )
+  const Player = ({playerId, onChange}) => (
+    <select onChange={onChange}>
+      {allPokemon.map((pokemon) => (
+        <option key={`${pokemon.id}-${playerId}`} value={`${pokemon.name}`}>
+          {pokemon.name}
+        </option>
+      ))}
+      </select>
+  );
 
   return (
     <main>
@@ -39,9 +37,9 @@ const BattleZone = ({ allPokemon }) => {
       <div>
         <h2>Battle Zone!</h2>
         <form>
-          <Player playerId="1" ref={player1}/>
+          <Player playerId="1" onChange={(e) => setPokemon1(getPokemon(e.target.value))} />
           VS{" "}
-          <Player playerId="2" ref={player2}/>
+          <Player playerId="2" onChange={(e) => setPokemon2(getPokemon(e.target.value))}/>
           <button onClick={battle}>BATTLE!</button>
         </form>
       </div>

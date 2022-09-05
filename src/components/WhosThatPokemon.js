@@ -32,7 +32,7 @@ const WhosThatPokemon = ({ allPokemon }) => {
   }, []);
 
   function resetStage() {
-    ref={input}
+    input.current.value = '';
     const newPokemon = getPokemon();
     setPokemon(newPokemon);
     pokemonName = cleanString(newPokemon.name);
@@ -62,9 +62,11 @@ const WhosThatPokemon = ({ allPokemon }) => {
   }
 
   function handleWin() {
-    dialog.showModal();
+    dialog.current.showModal();
     const newScore = score + 1;
-    localStorage.setItem("pokeScore", newScore);
+    if (typeof window !== `undefined`) {
+      localStorage.setItem("pokeScore", newScore);
+    }
     setScore(newScore);
   }
 
@@ -115,6 +117,7 @@ const WhosThatPokemon = ({ allPokemon }) => {
       <ScoreBord>Score: {score}</ScoreBord>
       <Pokemon src={pokemon.sprites.front_default} alt={pokemonName} />
       <AnswerBox
+        ref={input}
         type="text"
         onChange={(e) => handleChange(e)}
         valid={formValid}

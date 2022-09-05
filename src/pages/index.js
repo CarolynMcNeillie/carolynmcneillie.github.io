@@ -60,7 +60,7 @@ const IndexPage = () => {
     };
   });
 
-  const [view, setView] = useState("guess");
+  const [view, setView] = useState("battle");
 
   const Body = () => (
     <main>
