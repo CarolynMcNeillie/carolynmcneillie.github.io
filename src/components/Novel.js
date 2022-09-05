@@ -1,13 +1,20 @@
 import React, { useState } from "react";
+import { Golden, Page, Rule } from "../styles/novel";
 
 const Novel = ({ allPokemon }) => {
   return (
-    <main>
+    <Page>
       <h1>Simon's Novel</h1>
-      <h2>Chapter name</h2>
-      <p>Paragraph for the novel</p>
-      <hr />
-    </main>
+      <h2>Meet the Cast</h2>
+      <p>
+        <Golden>
+          <strong>Ash</strong>
+        </Golden>
+        - the <em>superstar</em> of pokemon he is the kindest and has most
+        justice in his heart. his bonds with pokemon are the biggest!
+      </p>
+      <Rule />
+    </Page>
   );
 };
 
