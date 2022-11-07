@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby";
 import Pokedex from "../components/Pokedex";
 import BattleZone from "../components/BattleZone";
 import WhosThatPokemon from "../components/WhosThatPokemon";
-import Novel from "../components/Novel";
+import Novel2 from "../components/Novel2";
 
 import {
   GlobalStyles,
@@ -67,7 +67,7 @@ const IndexPage = () => {
       {view === "pokedex" && <Pokedex allPokemon={allPokemon} />}
       {view === "battle" && <BattleZone allPokemon={allPokemon} />}
       {view === "guess" && <WhosThatPokemon allPokemon={allPokemon} />}
-      {view === "novel" && <Novel allPokemon={allPokemon} />}
+      {view === "novel" && <Novel2 />}
     </main>
   );
 

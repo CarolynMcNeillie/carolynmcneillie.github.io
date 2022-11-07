@@ -4,6 +4,7 @@ export const Page = styled.article`
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+  line-height: 1.5;
 `;
 
 export const Golden = styled.span`

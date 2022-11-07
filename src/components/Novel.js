@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Golden, Page, Rule } from "../styles/novel";
 
 const Novel = ({ allPokemon }) => {
