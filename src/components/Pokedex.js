@@ -30,7 +30,7 @@ const Pokedex = ({ allPokemon }) => {
         <Stat>
           <StatTitle>Types:</StatTitle> {pokemon.types.join(" and ")}
         </Stat>
-        <Stat>
+        <Stat className="capitalize">
           <StatTitle>Moves:</StatTitle>{" "}
           {pokemon.moves && pokemon.moves.join(", ")}
         </Stat>

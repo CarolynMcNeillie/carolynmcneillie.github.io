@@ -8,7 +8,11 @@ export const GlobalStyles = createGlobalStyle`
 
     h1, h2, h3 {
         font-family: 'Bungee', cursive; 
-    }  
+    }
+
+    .capitalize {
+        text-transform: capitalize;
+    }
 `;
 
 export const Nav = styled.nav`

@@ -29,13 +29,11 @@ export const AnswerBox = styled.input`
   text-align: center;
 
   ${(props) => {
-    switch (props.valid) {
-      case false:
-        return css`
+   !props.valid && css`
           border: 5px solid red;
         `;
     }
-  }}
+  }
 `;
 
 export const Button = styled.button`

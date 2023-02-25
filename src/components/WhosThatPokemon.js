@@ -106,9 +106,9 @@ const WhosThatPokemon = ({ allPokemon }) => {
         <h2>You got it!</h2>
         <img src={pokemon.sprites.front_default} alt={pokemonName} />
         <p>
-          {`The pokemon is ${pokemonName}, a ${pokemon.types.join(
-            " and "
-          )} type!`}
+          The pokemon is 
+          <span className="capitalize"> {pokemonName},</span>
+          {` a ${pokemon.types.join(" and ")} type!`}
         </p>
         <form method="dialog">
           <Button onClick={() => resetStage()}>OK</Button>
